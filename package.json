@@ -1,7 +1,7 @@
 {
   "name": "sse-nest-js",
   "version": "0.0.1",
-  "description": "Sample Nest JS app to test Server Side Events (SSE) to push unidirectional notifications to UI from API layer without Websockets.",
+  "description": "Sample Nest JS app to test Server-Sent Events (SSE) to push unidirectional notifications to UI from API layer without Websockets.",
   "author": "Dilipan Somasundaram",
   "private": true,
   "license": "UNLICENSED",
