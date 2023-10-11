@@ -13,8 +13,12 @@ Sample Nest JS app to test Server-Sent Events (SSE) to push unidirectional notif
 ## Local setup
 
 ```
-npm i
-npm start
+        $ git clone https://github.com/tamdilip/sse-nest-js.git
+        $ cd sse-nest-js
+        $ npm start
+        $ Visit in Browser -> http://localhost:3000/?userId=2
 ```
 
-Visit in Browser -> http://localhost:3000/?userId=2
+
+## Screenshot
+![Image of Demo App](https://raw.githubusercontent.com/tamdilip/sse-nest-js/main/client/images/demo.png)
