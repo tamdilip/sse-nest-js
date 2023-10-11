@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<body>
+
+    <div style="text-align: center;">
+        <h1>RECEIVING SERVER UPDATES</h1>
+        <p>
+            ( Update userId in URL query param between 1-5 to receive notification to a random user id from the server
+            side corn scheduler
+            every 5 sec )
+        </p>
+
+        <hr>
+        <div id="message"> </div>
+        <p>⌛</p>
+    </div>
+
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const userId = urlParams.get('userId');
+
+        const setupSSE = userId => {
+            const source = new EventSource(`/sse/${userId}`);
+            source.onopen = () => {
+                console.log(`SSE Connection established for user id: ${userId} !`);
+
+                window.onbeforeunload = () => {
+                    console.log(`Disconnect SSE for user id: ${userId} !`);
+                    fetch(`sse/${userId}`, { method: 'DELETE', keepalive: true });
+                }
+            };
+            source.onmessage = event => {
+                document.getElementById('message').innerHTML += event.data + '<br>';
+            };
+            source.onerror = error => {
+                console.error(`SSE Connection error for user id: ${userId} - `, error);
+            };
+            source.onclose = () => {
+                console.log(`SSE Connection closed for user id: ${userId} !`);
+            };
+        };
+
+        if (userId) {
+            if (typeof (EventSource) !== 'undefined')
+                setupSSE(userId);
+            else
+                document.getElementById('message').innerHTML = 'Sorry, your browser does not support server-sent events (SSE) 😔';
+        }
+    </script>
+
+</body>
+
+</html>
