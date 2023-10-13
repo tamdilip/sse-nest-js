@@ -29,7 +29,7 @@
         <p>
             ( Update userId in URL query param between 1-5 to receive notification to a random user id from the server
             side corn scheduler
-            every 5 sec )
+            every 2 sec )
         </p>
 
         <hr>
@@ -45,11 +45,6 @@
             const source = new EventSource(`/sse/${userId}`);
             source.onopen = () => {
                 console.log(`SSE Connection established for user id: ${userId} !`);
-
-                window.onbeforeunload = () => {
-                    console.log(`Disconnect SSE for user id: ${userId} !`);
-                    fetch(`sse/${userId}`, { method: 'DELETE', keepalive: true });
-                }
             };
             source.onmessage = event => {
                 document.getElementById('message').innerHTML += event.data + '<br>';

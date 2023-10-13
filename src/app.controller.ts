@@ -19,9 +19,4 @@ export class AppController {
   async createSse(@Param('userId') userId: string) {
     return this.sseService.subscribe(userId);
   }
-
-  @Delete('sse/:userId')
-  async deleteSse(@Param('userId') userId: string) {
-    return this.sseService.disconnect(userId);
-  }
 }
